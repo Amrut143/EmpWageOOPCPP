@@ -3,16 +3,31 @@
 #include <ctime>
 using namespace std;
 
-class EmpWageComputation {
+class EmpWageBuilder {
+
+	string company;
+	int wagePerHr;
+	int numOfWorkingDays;
+	int maxHrInMonth;
+	int monthlyWage;
 
 	public:
-	void computeEmpWage(string company, int wagePerHr, int maxHrInMonth, int numOfWorkingDays) {
+	EmpWageBuilder(string company, int wagePerHr,
+						int numOfWorkingDays, int maxHrInMonth) {
+
+		this -> company = company;
+		this -> wagePerHr = wagePerHr;
+		this -> numOfWorkingDays = numOfWorkingDays;
+		this -> maxHrInMonth = maxHrInMonth;
+   }
+
+	public:
+	void computeEmpWage() {
 
 		const int PART_TIME = 1;
 		const int FULL_TIME = 2;
 
 		int empHrs;
-		int monthlyWage = 0;
 		int totalEmpHrs = 0;
 		int totalWorkingDays = 0;
 
@@ -47,11 +62,14 @@ int main() {
 
 	cout << "Welcome to employee wage problem" << endl;
 
-	EmpWageComputation employee;
+	EmpWageBuilder* dmart = new EmpWageBuilder("Dmart", 20, 100, 20);
+	EmpWageBuilder* flipkart = new EmpWageBuilder("FlipKart", 30, 150, 25);
+	EmpWageBuilder* bigbasket = new EmpWageBuilder("BigBasket", 50, 200, 30);
 
-	employee.computeEmpWage("Dmart", 20, 100, 20);
-	employee.computeEmpWage("FlipKart", 30, 150, 25);
-	employee.computeEmpWage("BigBasket", 50, 200, 30);
+
+	dmart -> computeEmpWage();
+	flipkart -> computeEmpWage();
+	bigbasket -> computeEmpWage();
 
 	return 0;
 }
