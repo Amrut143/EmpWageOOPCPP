@@ -5,6 +5,9 @@ using namespace std;
 
 class EmpWageComputation {
 
+	int EMP_WAGE_PER_HOUR = 20;
+	int empWorkingHour, dailyWage;
+
 	public:
 	void checkAttendance() {
 
@@ -13,10 +16,19 @@ class EmpWageComputation {
 
 		if(empCheck == 1) {
 			cout << "Employee is present" << endl;
+			computeEmpDailyWage();
 		}
 		else {
 			cout << "Employee is abscent" << endl;
 		}
+	}
+
+	void computeEmpDailyWage() {
+
+		empWorkingHour = 8;
+		dailyWage = EMP_WAGE_PER_HOUR * empWorkingHour;
+
+		cout << "Employee daily wage is: " << dailyWage << endl;
 	}
 };
 
@@ -28,3 +40,6 @@ int main() {
 
 	employee.checkAttendance();
 }
+
+
+
