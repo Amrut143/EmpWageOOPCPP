@@ -5,30 +5,30 @@ using namespace std;
 
 class EmpWageComputation {
 
-	int EMP_WAGE_PER_HOUR = 20;
-	int empWorkingHour, dailyWage;
+	const int EMP_WAGE_PER_HOUR = 20;
+	const int PART_TIME = 1;
+	const int FULL_TIME = 2;
+
+	int empHrs, empWage = 0;
 
 	public:
-	void checkAttendance() {
+	void computeEmpWage() {
 
 		srand(time(0));
-		int empCheck = rand() % 2;
+		int empCheck = rand() % 3;
 
-		if(empCheck == 1) {
-			cout << "Employee is present" << endl;
-			computeEmpDailyWage();
+		if(empCheck == PART_TIME) {
+			empHrs = 4;
+		}
+		else if(empCheck == FULL_TIME) {
+			empHrs = 8;
 		}
 		else {
-			cout << "Employee is abscent" << endl;
+			empHrs = 0;
 		}
-	}
+		empWage = empHrs * EMP_WAGE_PER_HOUR;
 
-	void computeEmpDailyWage() {
-
-		empWorkingHour = 8;
-		dailyWage = EMP_WAGE_PER_HOUR * empWorkingHour;
-
-		cout << "Employee daily wage is: " << dailyWage << endl;
+		cout << "Employee Daily Wage Is: " << empWage << endl;
 	}
 };
 
@@ -38,8 +38,9 @@ int main() {
 
 	EmpWageComputation employee;
 
-	employee.checkAttendance();
+	employee.computeEmpWage();
 }
+
 
 
 
