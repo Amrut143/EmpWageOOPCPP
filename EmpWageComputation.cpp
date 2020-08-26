@@ -2,9 +2,10 @@
 #include <cstdlib>
 #include <ctime>
 #include "CompanyEmpWage.hpp"
+#include "EmpWageInterface.hpp"
 using namespace std;
 
-class EmpWageBuilder {
+class EmpWageBuilder : IEmpWageBuilder {
 
 	int numOfCompany = 0;
 	CompanyEmpWage *companyEmpWage[5];
