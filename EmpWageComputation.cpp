@@ -9,12 +9,23 @@ using namespace std;
 class EmpWageBuilder : IEmpWageBuilder {
 
 	list<CompanyEmpWage*> companyList;
-	list<CompanyEmpWage> dailyWage;
+	list<int> dailyWage;
 
 	public:
 	void addCompanyEmpWage(string companyName, int wagePerHr, int numOfWorkingDays, int maxHrsInMonth) {
 
 		companyList.push_back(new CompanyEmpWage(companyName, wagePerHr, numOfWorkingDays, maxHrsInMonth));
+	}
+
+	void getTotalWageByCompany(string companyName) {
+
+		for(CompanyEmpWage *company : companyList) {
+
+			if(company -> companyName == companyName) {
+
+				cout << "Total Wage for Company " << companyName << " Is " << company -> monthlyWage;
+			}
+		}
 	}
 
 	private:
@@ -77,6 +88,7 @@ int main() {
 	emp.addCompanyEmpWage("BigBasket", 50, 200, 30);
 
 	emp.computeEmpWage();
+	emp.getTotalWageByCompany("Dmart");
 
 	return 0;
 }
