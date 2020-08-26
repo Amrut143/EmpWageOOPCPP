@@ -5,22 +5,25 @@ using namespace std;
 
 class EmpWageComputation {
 
-	int empHrs;
-	int monthlyWage = 0;
-	int totalEmpHrs = 0;
-	int totalWorkingDays = 0;
-
 	public:
 	void computeEmpWage() {
 
 		const int EMP_WAGE_PER_HOUR = 20;
 		const int NUM_OF_WORKING_DAYS = 20;
+		const int MAX_HOUR_IN_MONTH = 100;
 		const int PART_TIME = 1;
 		const int FULL_TIME = 2;
 
+		int empHrs;
+		int monthlyWage = 0;
+		int totalEmpHrs = 0;
+		int totalWorkingDays = 0;
+
+
 		srand(time(0));
 
-		for(int day = 1; day <= NUM_OF_WORKING_DAYS; day++) {
+		while(totalEmpHrs <= MAX_HOUR_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
+			totalWorkingDays++;
 
 			int empCheck = rand() % 3;
 
@@ -35,7 +38,7 @@ class EmpWageComputation {
 					break;
 
 				default:
-					empHrs = 0;
+				empHrs = 0;
 			}
 			totalEmpHrs += empHrs;
 		}
