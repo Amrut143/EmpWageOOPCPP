@@ -5,24 +5,20 @@ using namespace std;
 
 class EmpWageComputation {
 
-	int empHrs;
-	int monthlyWage = 0;
-	int totalEmpHrs = 0;
-	int totalWorkingDays = 0;
-
-
 	public:
-	void computeEmpWage() {
+	void computeEmpWage(string company, int wagePerHr, int maxHrInMonth, int numOfWorkingDays) {
 
-		const int EMP_WAGE_PER_HOUR = 20;
-		const int NUM_OF_WORKING_DAYS = 20;
-		const int MAX_HOUR_IN_MONTH = 100;
 		const int PART_TIME = 1;
 		const int FULL_TIME = 2;
 
+		int empHrs;
+		int monthlyWage = 0;
+		int totalEmpHrs = 0;
+		int totalWorkingDays = 0;
+
 		srand(time(0));
 
-		while(totalEmpHrs <= MAX_HOUR_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS) {
+		while(totalEmpHrs <= maxHrInMonth && totalWorkingDays < numOfWorkingDays) {
 			totalWorkingDays++;
 
 			int empCheck = rand() % 3;
@@ -38,12 +34,12 @@ class EmpWageComputation {
 					break;
 
 				default:
-				empHrs = 0;
+					empHrs = 0;
 			}
 			totalEmpHrs += empHrs;
 		}
-		monthlyWage = totalEmpHrs * EMP_WAGE_PER_HOUR;
-		cout << "Employee Monthly Wage Is: " << monthlyWage << endl;
+		monthlyWage = totalEmpHrs * wagePerHr;
+		cout << "Employee Monthly Wage For Company " << company << " Is: " << monthlyWage << endl;
 	}
 };
 
@@ -53,7 +49,10 @@ int main() {
 
 	EmpWageComputation employee;
 
-	employee.computeEmpWage();
+	employee.computeEmpWage("Dmart", 20, 100, 20);
+	employee.computeEmpWage("FlipKart", 30, 150, 25);
+	employee.computeEmpWage("BigBasket", 50, 200, 30);
 
 	return 0;
 }
+
