@@ -5,6 +5,12 @@ using namespace std;
 
 class EmpWageComputation {
 
+	int empHrs;
+	int monthlyWage = 0;
+	int totalEmpHrs = 0;
+	int totalWorkingDays = 0;
+
+
 	public:
 	void computeEmpWage() {
 
@@ -13,12 +19,6 @@ class EmpWageComputation {
 		const int MAX_HOUR_IN_MONTH = 100;
 		const int PART_TIME = 1;
 		const int FULL_TIME = 2;
-
-		int empHrs;
-		int monthlyWage = 0;
-		int totalEmpHrs = 0;
-		int totalWorkingDays = 0;
-
 
 		srand(time(0));
 
@@ -57,5 +57,3 @@ int main() {
 
 	return 0;
 }
-
-
