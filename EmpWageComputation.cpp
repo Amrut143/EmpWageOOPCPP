@@ -9,6 +9,7 @@ using namespace std;
 class EmpWageBuilder : IEmpWageBuilder {
 
 	list<CompanyEmpWage*> companyList;
+	list<CompanyEmpWage> dailyWage;
 
 	public:
 	void addCompanyEmpWage(string companyName, int wagePerHr, int numOfWorkingDays, int maxHrsInMonth) {
@@ -46,6 +47,7 @@ class EmpWageBuilder : IEmpWageBuilder {
 				default:
 					empHrs = 0;
 			}
+			dailyWage.push_back(empHrs * companyEmpWage.wagePerHr);
 			totalEmpHrs += empHrs;
 		}
 		return totalEmpHrs * companyEmpWage.wagePerHr;
