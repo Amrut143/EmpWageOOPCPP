@@ -1,28 +1,23 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include "CompanyEmpWage.hpp"
 using namespace std;
 
 class EmpWageBuilder {
 
-	string company;
-	int wagePerHr;
-	int numOfWorkingDays;
-	int maxHrInMonth;
-	int monthlyWage;
+	int numOfCompany = 0;
+	CompanyEmpWage *companyEmpWage[5];
 
 	public:
-	EmpWageBuilder(string company, int wagePerHr,
-						int numOfWorkingDays, int maxHrInMonth) {
+	void addCompanyEmpWage(string company, int wagePerHr, int numOfWorkingDays, int maxHrsInMonth) {
 
-		this -> company = company;
-		this -> wagePerHr = wagePerHr;
-		this -> numOfWorkingDays = numOfWorkingDays;
-		this -> maxHrInMonth = maxHrInMonth;
-   }
+		companyEmpWage[numOfCompany] = new CompanyEmpWage(company, wagePerHr, numOfWorkingDays, maxHrsInMonth);
+		numOfCompany++;
+	}
 
-	public:
-	void computeEmpWage() {
+	private:
+	int calculateEmpWage(CompanyEmpWage &companyEmpWage) {
 
 		const int PART_TIME = 1;
 		const int FULL_TIME = 2;
@@ -33,7 +28,7 @@ class EmpWageBuilder {
 
 		srand(time(0));
 
-		while(totalEmpHrs <= maxHrInMonth && totalWorkingDays < numOfWorkingDays) {
+		while(totalEmpHrs <= companyEmpWage.maxHrsInMonth && totalWorkingDays < companyEmpWage.numOfWorkingDays) {
 			totalWorkingDays++;
 
 			int empCheck = rand() % 3;
@@ -53,8 +48,19 @@ class EmpWageBuilder {
 			}
 			totalEmpHrs += empHrs;
 		}
-		monthlyWage = totalEmpHrs * wagePerHr;
-		cout << "Employee Monthly Wage For Company " << company << " Is: " << monthlyWage << endl;
+		return totalEmpHrs * companyEmpWage.wagePerHr;
+	}
+
+	public:
+	void computeEmpWage() {
+
+		for(int count = 0; count < numOfCompany; count++) {
+
+			companyEmpWage[count] -> setEmpWagePerMonth(calculateEmpWage(*companyEmpWage[count]));
+			cout << "Monthly Wage Of Employee For Company "
+					<< companyEmpWage[count] -> company << " Is "
+					<< companyEmpWage[count] -> monthlyWage << endl;
+		}
 	}
 };
 
@@ -62,14 +68,13 @@ int main() {
 
 	cout << "Welcome to employee wage problem" << endl;
 
-	EmpWageBuilder* dmart = new EmpWageBuilder("Dmart", 20, 100, 20);
-	EmpWageBuilder* flipkart = new EmpWageBuilder("FlipKart", 30, 150, 25);
-	EmpWageBuilder* bigbasket = new EmpWageBuilder("BigBasket", 50, 200, 30);
+	EmpWageBuilder emp;
 
+	emp.addCompanyEmpWage("Dmart", 20, 100, 20);
+	emp.addCompanyEmpWage("FlipKart", 30, 150, 25);
+	emp.addCompanyEmpWage("BigBasket", 50, 200, 30);
 
-	dmart -> computeEmpWage();
-	flipkart -> computeEmpWage();
-	bigbasket -> computeEmpWage();
+	emp.computeEmpWage();
 
 	return 0;
 }
