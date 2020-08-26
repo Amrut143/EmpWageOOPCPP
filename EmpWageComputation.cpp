@@ -1,20 +1,19 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <list>
 #include "CompanyEmpWage.hpp"
 #include "EmpWageInterface.hpp"
 using namespace std;
 
 class EmpWageBuilder : IEmpWageBuilder {
 
-	int numOfCompany = 0;
-	CompanyEmpWage *companyEmpWage[5];
+	list<CompanyEmpWage*> companyList;
 
 	public:
-	void addCompanyEmpWage(string company, int wagePerHr, int numOfWorkingDays, int maxHrsInMonth) {
+	void addCompanyEmpWage(string companyName, int wagePerHr, int numOfWorkingDays, int maxHrsInMonth) {
 
-		companyEmpWage[numOfCompany] = new CompanyEmpWage(company, wagePerHr, numOfWorkingDays, maxHrsInMonth);
-		numOfCompany++;
+		companyList.push_back(new CompanyEmpWage(companyName, wagePerHr, numOfWorkingDays, maxHrsInMonth));
 	}
 
 	private:
@@ -55,12 +54,12 @@ class EmpWageBuilder : IEmpWageBuilder {
 	public:
 	void computeEmpWage() {
 
-		for(int count = 0; count < numOfCompany; count++) {
+		for(CompanyEmpWage *company : companyList ) {
 
-			companyEmpWage[count] -> setEmpWagePerMonth(calculateEmpWage(*companyEmpWage[count]));
+			company -> setEmpWagePerMonth(calculateEmpWage(*company));
 			cout << "Monthly Wage Of Employee For Company "
-					<< companyEmpWage[count] -> company << " Is "
-					<< companyEmpWage[count] -> monthlyWage << endl;
+					<< company -> companyName << " Is "
+					<< company -> monthlyWage << endl;
 		}
 	}
 };

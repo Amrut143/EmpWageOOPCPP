@@ -4,19 +4,19 @@ using namespace std;
 class CompanyEmpWage {
 
 	public:
-	string company;
+	string companyName;
 	int wagePerHr;
 	int numOfWorkingDays;
 	int maxHrsInMonth;
 	int monthlyWage;
 
 	public:
-	CompanyEmpWage(string company, int wagePerHr, int numOfWorkingDays, int maxHrsInMonth) {
+	CompanyEmpWage(string companyName, int wagePerHr, int numOfWorkingDays, int maxHrsInMonth) {
 
 		this -> wagePerHr = wagePerHr;
 		this -> numOfWorkingDays = numOfWorkingDays;
 		this -> maxHrsInMonth = maxHrsInMonth;
-		this -> company = company;
+		this -> companyName = companyName;
 	}
 
 	public:
